@@ -22,8 +22,5 @@ Notes
 - For production, use a persistent vector DB (e.g., Pinecone, Weaviate) and robust chunking.
 - The `server/rag.py` file demonstrates embedding + retrieval + LLM answer composition using OpenAI.
 
-Documentation
-- Project plan: [docs/PROJECT_PLAN.md](docs/PROJECT_PLAN.md)
-- Architecture: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
-- API spec: [docs/API_SPEC.md](docs/API_SPEC.md)
-- Wireframe: [docs/WIREFRAME.md](docs/WIREFRAME.md)
+
+
