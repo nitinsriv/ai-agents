@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>MVP AI RAG Chat</title>
+    <style>body{font-family:Arial;margin:20px}#chat{border:1px solid #ddd;height:60vh;overflow:auto;padding:10px}.message{margin:8px 0}.user{color:#0a66c2}.bot{color:#111}#inputRow{margin-top:10px;display:flex;gap:8px}textarea{flex:1;height:60px}</style>
+  </head>
+  <body>
+    <h2>MVP AI RAG Chat</h2>
+    <div id="chat"></div>
+    <div id="inputRow">
+      <textarea id="q"></textarea>
+      <button id="send">Send</button>
+    </div>
+    <script>
+      const chat=document.getElementById('chat'), q=document.getElementById('q'), send=document.getElementById('send');
+      function append(role,text){const d=document.createElement('div');d.className='message '+(role==='user'?'user':'bot');d.textContent=(role==='user'?'You: ':'AI: ')+text;chat.appendChild(d);chat.scrollTop=chat.scrollHeight}
+      send.addEventListener('click',async()=>{const question=q.value.trim(); if(!question) return; append('user',question); q.value=''; append('bot','Thinking...'); const res=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question})}); const data=await res.json(); chat.removeChild(chat.lastChild); if(data.answer) append('bot',data.answer); else append('bot','Error: '+(data.error||'unknown'));});
+    </script>
+  </body>
+</html>
